@@ -1,5 +1,5 @@
 {
-  "name": "HappySanta/php-stat-collector",
+  "name": "happysanta/php-stat-collector",
   "description": "Save logs from php via udp",
   "keywords": [
     "logs"
