@@ -22,11 +22,14 @@ class StatCollector
      */
     public static function write(string $paramName, string $paramType, int $value)
     {
+        if (strpos(static::$appName, '/') === false) {
+            static::$appName .= '/0';
+        }
         try {
-            $msg = "RL:" . self::$appName . ":$paramName:$paramType:$value";
+            $msg = "RL:" . static::$appName . ":$paramName:$paramType:$value";
             $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
             $len = strlen($msg);
-            socket_sendto($sock, $msg, $len, 0, self::$host, self::$port);
+            socket_sendto($sock, $msg, $len, 0, static::$host, static::$port);
             socket_close($sock);
             return true;
         } catch (\Exception $e) {
@@ -58,6 +61,10 @@ class StatCollector
     public static function avg(string $paramName, int $value)
     {
         return self::write($paramName, self::AvgTag, $value);
+    }
+
+    public static function getStatName() {
+        return static::$appName;
     }
 
 }
