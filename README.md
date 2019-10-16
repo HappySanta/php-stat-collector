@@ -1,5 +1,9 @@
 # StatCollector
 
+```bash
+composer require happysanta/php-stat-collector
+```
+
 ```php
 <?php
 
