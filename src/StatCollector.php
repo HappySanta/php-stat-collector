@@ -13,7 +13,12 @@ class StatCollector
     const MaxTag = "M";
     const MinTag = "I";
     const AvgTag = "A";
-    const StrTag = "T";
+
+    const StrSumTag = "T";
+    const StrSetTag = "E";
+    const StrMinTag = "N";
+    const StrMaxTag = "X";
+    const StrAvgTag = "G";
 
     /**
      * @param string $paramName
@@ -89,12 +94,45 @@ class StatCollector
         return self::write($paramName, self::AvgTag, $value);
     }
 
+    /**
+     * @param string $paramName
+     * @param string $pattern
+     * @param int $value
+     * @return string
+     * @deprecated use strSum
+     */
     public static function str(string $paramName, string $pattern, int $value)
     {
-        return self::writeEx($paramName, self::StrTag, $pattern, $value);
+        return self::writeEx($paramName, self::StrSumTag, $pattern, $value);
     }
 
-    public static function getStatName() {
+    public static function strSum(string $paramName, string $pattern, int $value)
+    {
+        return self::writeEx($paramName, self::StrSumTag, $pattern, $value);
+    }
+
+    public static function strSet(string $paramName, string $pattern, int $value)
+    {
+        return self::writeEx($paramName, self::StrSetTag, $pattern, $value);
+    }
+
+    public static function strMin(string $paramName, string $pattern, int $value)
+    {
+        return self::writeEx($paramName, self::StrMinTag, $pattern, $value);
+    }
+
+    public static function strMax(string $paramName, string $pattern, int $value)
+    {
+        return self::writeEx($paramName, self::StrMaxTag, $pattern, $value);
+    }
+
+    public static function strAvg(string $paramName, string $pattern, int $value)
+    {
+        return self::writeEx($paramName, self::StrAvgTag, $pattern, $value);
+    }
+
+    public static function getStatName()
+    {
         return static::$appName;
     }
 
