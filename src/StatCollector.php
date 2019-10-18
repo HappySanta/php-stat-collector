@@ -13,6 +13,7 @@ class StatCollector
     const MaxTag = "M";
     const MinTag = "I";
     const AvgTag = "A";
+    const StrTag = "T";
 
     /**
      * @param string $paramName
@@ -90,7 +91,7 @@ class StatCollector
 
     public static function str(string $paramName, string $pattern, int $value)
     {
-        return self::writeEx($paramName, self::AvgTag, $pattern, $value);
+        return self::writeEx($paramName, self::StrTag, $pattern, $value);
     }
 
     public static function getStatName() {
