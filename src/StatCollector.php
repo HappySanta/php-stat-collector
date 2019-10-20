@@ -13,6 +13,7 @@ class StatCollector
     const MaxTag = "M";
     const MinTag = "I";
     const AvgTag = "A";
+    const HllTag = "L";
 
     const StrSumTag = "T";
     const StrSetTag = "E";
@@ -129,6 +130,11 @@ class StatCollector
     public static function strAvg(string $paramName, string $pattern, int $value)
     {
         return self::writeEx($paramName, self::StrAvgTag, $pattern, $value);
+    }
+
+    public static function hll(string $paramName, string $pattern)
+    {
+        return self::writeEx($paramName, self::HllTag, $pattern, 0);
     }
 
     public static function getStatName()
