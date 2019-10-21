@@ -14,6 +14,7 @@ class StatCollector
     const MinTag = "I";
     const AvgTag = "A";
     const HllTag = "L";
+    const HllDayTag = "D";
 
     const StrSumTag = "T";
     const StrSetTag = "E";
@@ -135,6 +136,11 @@ class StatCollector
     public static function hll(string $paramName, string $pattern)
     {
         return self::writeEx($paramName, self::HllTag, $pattern, 0);
+    }
+
+    public static function hllDay(string $paramName, string $pattern)
+    {
+        return self::writeEx($paramName, self::HllDayTag, $pattern, 0);
     }
 
     public static function getStatName()
