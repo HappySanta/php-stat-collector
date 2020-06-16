@@ -25,7 +25,7 @@ class Metric extends \Hs\StatCollector
     
     public static function getAppName():string
     {
-        return config("app.name", "bad_app");
+        return mb_strtolower(config("app.name", "bad_app"));
     }
 
     public static function fatalError() {

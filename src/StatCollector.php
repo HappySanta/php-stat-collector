@@ -152,8 +152,8 @@ class StatCollector
         return self::writeEx($paramName, self::HllDayTag, $pattern, 0);
     }
 
-    private static function getCorrectAppName():string {
-        $name = self::getAppName();
+    public static function getCorrectAppName():string {
+        $name = static::getAppName();
         if (strpos($name, '/') === false) {
             $name .= '/0';
         }

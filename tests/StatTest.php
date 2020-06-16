@@ -1,21 +1,28 @@
 <?php
 
-class B extends \Hs\StatCollector {
-    public static $appName = "goog";
+use PHPUnit\Framework\TestCase;
+
+class MyMetric extends \Hs\StatCollector {
+    public static function getAppName():string
+    {
+        return "test_app_555";
+    }
 }
 
 
-class StatTest extends PHPUnit_Framework_TestCase
+class StatTest extends TestCase
 {
     public function testUsersGet()
     {
-          \Hs\StatCollector::sum("test_run", 1);
-          $this->assertNull(\Hs\StatCollector::$lastError);
+          MyMetric::sum("test_run", 1);
+          $this->assertNull(MyMetric::$lastError);
     }
 
     public function testAppName() {
-        $this->assertEquals( "goog", B::getStatName() );
-        B::sum("test_run", 1);
-        $this->assertEquals( "goog/0", B::getStatName() );
+        $this->assertEquals( "test_app_555/0", MyMetric::getCorrectAppName() );
+        MyMetric::sum("test_run", 1);
+        $this->assertEquals( "test_app_555/0", MyMetric::getCorrectAppName() );
     }
 }
+
+
