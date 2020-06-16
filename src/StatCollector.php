@@ -22,6 +22,15 @@ class StatCollector
     const StrMaxTag = "X";
     const StrAvgTag = "G";
 
+    public static function isWriteEnable():bool {
+        return true;
+    }
+
+    public static function getAppName():string
+    {
+        return static::$appName;
+    }
+
     /**
      * @param string $paramName
      * @param string $paramType
@@ -30,11 +39,10 @@ class StatCollector
      */
     public static function write(string $paramName, string $paramType, int $value)
     {
-        if (strpos(static::$appName, '/') === false) {
-            static::$appName .= '/0';
-        }
+        if (self::isWriteEnable() === false) return true;
+
         try {
-            $msg = "RL:" . static::$appName . ":$paramName:$paramType:$value";
+            $msg = "RL:" . static::getCorrectAppName() . ":$paramName:$paramType:$value";
             $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
             $len = strlen($msg);
             socket_sendto($sock, $msg, $len, 0, static::$host, static::$port);
@@ -55,11 +63,12 @@ class StatCollector
      */
     public static function writeEx(string $paramName, string $paramType, string $pattern, int $value)
     {
+        if (self::isWriteEnable() === false) return true;
         if (strpos(static::$appName, '/') === false) {
             static::$appName .= '/0';
         }
         try {
-            $msg = "RL:" . static::$appName . ":$paramName:$paramType:$value:$pattern";
+            $msg = "RL:" . static::getCorrectAppName() . ":$paramName:$paramType:$value:$pattern";
             $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
             $len = strlen($msg);
             socket_sendto($sock, $msg, $len, 0, static::$host, static::$port);
@@ -143,9 +152,12 @@ class StatCollector
         return self::writeEx($paramName, self::HllDayTag, $pattern, 0);
     }
 
-    public static function getStatName()
-    {
-        return static::$appName;
+    private static function getCorrectAppName():string {
+        $name = self::getAppName();
+        if (strpos($name, '/') === false) {
+            $name .= '/0';
+        }
+        return $name;
     }
 
 }

@@ -1,9 +1,13 @@
 # StatCollector
 
+Библиотека для отпавки метрик в графану через https://github.com/HappySanta/logs-collector
+
 ```bash
 composer require happysanta/php-stat-collector
 ```
 
+
+Пример для Laravel
 ```php
 <?php
 
@@ -13,7 +17,14 @@ namespace App;
 
 class Metric extends \Hs\StatCollector
 {
-    public static $appName = "bad_app";
+    public static function isWriteEnable():bool {
+        return !!config("app.enabled_grafana", "1");
+    }
+    
+    public static function getAppName():string
+    {
+        return config("app.name", "bad_app");
+    }
 
     public static function fatalError() {
         self::sum("fatal_error", 1);
