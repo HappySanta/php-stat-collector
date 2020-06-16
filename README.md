@@ -2,6 +2,8 @@
 
 Библиотека для отпавки метрик в графану через https://github.com/HappySanta/logs-collector
 
+https://packagist.org/packages/happysanta/php-stat-collector
+
 ```bash
 composer require happysanta/php-stat-collector
 ```
