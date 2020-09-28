@@ -2,6 +2,11 @@
 
 namespace Hs;
 
+/**
+ * Class StatCollector
+ * @package Hs
+ * @deprecated use StatWriter
+ */
 class StatCollector
 {
     public static $host = "127.0.0.1";
