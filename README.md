@@ -1,6 +1,6 @@
 # StatCollector
 
-Библиотека для отпавки метрик в графану через https://github.com/HappySanta/logs-collector
+Библиотека для отправки метрик в графану через https://github.com/HappySanta/logs-collector
 
 https://packagist.org/packages/happysanta/php-stat-collector
 
